@@ -40,6 +40,7 @@ class ExerciseProcessorTest {
                package com.github.mideo.exercises;
               \s
                interface Exercise<T, K> {
+                 String name();
                  T partOne();
                  K partTwo();
                }
@@ -54,6 +55,10 @@ class ExerciseProcessorTest {
              \s
               @DailyExercise
               public class Dummy implements Exercise<Integer, Integer>{
+                @Override
+                public String name() {
+                  return "Dummy Exercise";
+                }
                 @Override
                 public Integer partOne() {
                   return 1;

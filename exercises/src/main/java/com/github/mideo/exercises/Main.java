@@ -6,7 +6,7 @@ public class Main {
         exercise -> {
           System.out.println(exercise.getClass().getSimpleName());
           System.out.println("Part 1: "+ exercise.partOne());
-          System.out.println("Part 3: "+ exercise.partTwo());
+          System.out.println("Part 2: "+ exercise.partTwo());
         }
     );
   }

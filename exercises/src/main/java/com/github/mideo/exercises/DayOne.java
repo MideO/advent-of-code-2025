@@ -1,7 +1,12 @@
 package com.github.mideo.exercises;
 
 @DailyExercise
-public class Dummy implements Exercise<Integer, Integer> {
+public class DayOne implements Exercise<Integer, Integer> {
+
+  @Override
+  public String name() {
+    return "Day 1: Secret Entrance ";
+  }
 
   @Override
   public Integer partOne() {
