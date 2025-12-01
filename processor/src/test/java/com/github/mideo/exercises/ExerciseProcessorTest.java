@@ -75,7 +75,7 @@ class ExerciseProcessorTest {
 
     // Verify generated file exists
     JavaFileObject generated = compilation.generatedSourceFile(
-        "com.github.mideo.generated.DailyExerciseRegistry"
+        "com.github.mideo.exercises.DailyExerciseRegistry"
     ).orElseThrow(() -> new AssertionError("DailyExerciseRegistry registry not found"));
 
     String generatedSrc = generated.getCharContent(false).toString();

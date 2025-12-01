@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'application'   // if you have a main class
+}
+
+group = 'com.github.mideo'
+version = '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'com.github.mideo.exercises.Main'  // your main class
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':processor')
+    annotationProcessor project(':processor')
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'com.google.testing.compile:compile-testing:0.21.0'
+    testImplementation 'com.google.truth:truth:1.4.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.build.dependsOn('test')
+
+// Optional: show annotation processor output during compilation
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xlint:processing']
+}
+
+tasks.test {
+    testLogging {
+        events "passed", "skipped", "failed"   // show all test results
+        exceptionFormat "full"                  // full stack traces
+        showStandardStreams = true              // show println and logger output
+    }
+
+    // Optional: fail build on first test failure
+    failFast = false
+}

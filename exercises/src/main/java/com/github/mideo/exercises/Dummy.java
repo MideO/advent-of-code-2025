@@ -1,15 +1,15 @@
 package com.github.mideo.exercises;
 
 @DailyExercise
-public class DummyTask implements Exercise<Integer, Integer> {
+public class Dummy implements Exercise<Integer, Integer> {
 
   @Override
   public Integer partOne() {
-    return 1;
+    return 0;
   }
 
   @Override
   public Integer partTwo() {
-    return 2;
+    return 0;
   }
 }

@@ -16,16 +16,11 @@ public class ExerciseProcessor extends AbstractProcessor {
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     Set<? extends Element> exercises = roundEnv.getElementsAnnotatedWith(DailyExercise.class);
-    processingEnv.getMessager().printMessage(
-        javax.tools.Diagnostic.Kind.NOTE,
-        "Generating registry with " + exercises.size() + " exercises"
-    );
-
     if (exercises.isEmpty()) return true;
 
     try {
       JavaFileObject file = processingEnv.getFiler().createSourceFile(
-          "com.github.mideo.generated.DailyExerciseRegistry"
+          "com.github.mideo.exercises.DailyExerciseRegistry"
       );
       try (Writer writer = file.openWriter()) {
         writer.write("""
@@ -50,7 +45,7 @@ public class ExerciseProcessor extends AbstractProcessor {
             """);
       }
     } catch (Exception ex) {
-      throw new RuntimeException(ex);
+      throw new RuntimeException("ExerciseProcessor Failed!!", ex);
     }
     return true;
   }
