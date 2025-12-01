@@ -28,8 +28,6 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' }}
           cache-write-only: false
-      - name: List Gradle Tasks
-        run: ./gradlew tasks
 
       - name: Test with Gradle
         run: ./gradlew clean test
