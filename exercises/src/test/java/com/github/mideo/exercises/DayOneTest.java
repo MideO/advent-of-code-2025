@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static com.github.mideo.exercises.DayOne.CircularDail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DayOneTest {
 
@@ -31,7 +31,7 @@ class DayOneTest {
   }
 
   @Test
-  void rotateInstructions() {
+  void countOccurrenceOfZeroLocationAfterRotation() {
     var instructions = List.of(
         "L68",
         "L30",
@@ -44,7 +44,51 @@ class DayOneTest {
         "R14",
         "L82"
     );
-    assertEquals(3, CircularDail.countOccurrenceOfZeroLocationAfterRotation(50, instructions));
+    assertEquals(3, CircularDail.countOccurrenceOfZeroLocationAfterRotations(instructions));
+  }
+
+  @Test
+  void rightCompleteDailCycles() {
+    var result = CircularDail.completeDailCycles(50, "R1000");
+    assertEquals(50, result.getKey());
+    assertEquals(10, result.getValue());
+  }
+
+  @Test
+  void rightIncompleteDailCycles() {
+    var result = CircularDail.completeDailCycles(50, "R10");
+    assertEquals(60, result.getKey());
+    assertEquals(0, result.getValue());
+  }
+
+  @Test
+  void leftIncompleteDailCycles() {
+    var result = CircularDail.completeDailCycles(20, "L10");
+    assertEquals(10, result.getKey());
+    assertEquals(0, result.getValue());
+  }
+
+  @Test
+  void leftCompleteDailCycles() {
+    var result = CircularDail.completeDailCycles(20, "L120");
+    assertEquals(0, result.getKey());
+    assertEquals(2, result.getValue());
+  }
+  @Test
+  void countOccurrenceOfZeroLocationAfterRotations() {
+    var instructions = List.of(
+        "L68",
+        "L30",
+        "R48",
+        "L5",
+        "R60",
+        "L55",
+        "L1",
+        "L99",
+        "R14",
+        "L82"
+    );
+    assertEquals(6, CircularDail.countZeroLocationInRotations(instructions));
   }
 
   @Test
@@ -59,5 +103,6 @@ class DayOneTest {
 
   @Test
   void partTwo() {
+    assertEquals(6738,new DayOne().partTwo());
   }
 }
