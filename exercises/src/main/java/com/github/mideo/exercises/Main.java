@@ -1,12 +1,15 @@
 package com.github.mideo.exercises;
 
+import java.util.logging.Logger;
+
 public class Main {
+  static Logger logger = Logger.getLogger(Main.class.getName());
   public static void main(String[] args) {
-    DailyExerciseRegistry.getExercises().stream().forEach(
+    DailyExerciseRegistry.getExercises().forEach(
         exercise -> {
-          System.out.println(exercise.getClass().getSimpleName());
-          System.out.println("Part 1: "+ exercise.partOne());
-          System.out.println("Part 2: "+ exercise.partTwo());
+         logger.info(exercise.getClass().getSimpleName());
+         logger.info("Part 1: "+ exercise.partOne());
+         logger.info("Part 2: "+ exercise.partTwo());
         }
     );
   }

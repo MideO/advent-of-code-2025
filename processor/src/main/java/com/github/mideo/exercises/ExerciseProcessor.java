@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SupportedAnnotationTypes("com.github.mideo.exercises.DailyExercise")
-@SupportedSourceVersion(SourceVersion.RELEASE_21)
+//@SupportedSourceVersion(SourceVersion.RELEASE_21)
 public class ExerciseProcessor extends AbstractProcessor {
 
   @Override
