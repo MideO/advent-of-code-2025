@@ -24,6 +24,7 @@ class DayOneTest {
     assertEquals(19, CircularDail.rotate(11, "R8"));
   }
 
+
   @Test
   void rightOperatorBeyondZero() {
     assertEquals(5, CircularDail.rotate(99, "R6"));
@@ -43,7 +44,7 @@ class DayOneTest {
         "R14",
         "L82"
     );
-    assertEquals(3, CircularDail.rotate(50, instructions));
+    assertEquals(3, CircularDail.countOccurrenceOfZeroLocationAfterRotation(50, instructions));
   }
 
   @Test
@@ -53,6 +54,7 @@ class DayOneTest {
 
   @Test
   void partOne() {
+      assertEquals(1150,new DayOne().partOne());
   }
 
   @Test
