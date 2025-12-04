@@ -3,6 +3,8 @@ package com.github.mideo.exercises;
 import com.github.mideo.InputReader;
 
 import java.util.Arrays;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
@@ -27,6 +29,18 @@ public class DayTwo implements Exercise<Long, Long> {
             return subsstring.repeat(times).equals(value);
 
         }
+
+        boolean isSequenceRepeatedAtLeast(int times) {
+            if (value.length() < times) return false;
+            int half = Math.ceilDiv(value.length(), times);
+            return IntStream.rangeClosed(1, half)
+                    .anyMatch(index -> {
+                                var computed = value.substring(0, index)
+                                        .repeat(value.length() / index);
+                                return computed.equals(value);
+                            }
+                    );
+        }
     }
 
 
@@ -41,25 +55,39 @@ public class DayTwo implements Exercise<Long, Long> {
                                         .filter(id -> id.isSequenceRepeated(numberOfRepeatedSequence));
                             }
                     );
+        }
 
-
+        Stream<Id> getIdsWithRepeatedSequenceOfAtLeast(int numberOfRepeatedSequence) {
+            return Arrays.stream(values)
+                    .flatMap(
+                            range -> {
+                                var numbers = stream(range);
+                                return numbers.mapToObj(number -> new Id(String.valueOf(number)))
+                                        .filter(id -> id.isSequenceRepeatedAtLeast(numberOfRepeatedSequence));
+                            }
+                    );
         }
     }
 
-    @Override
-    public Long partOne() {
+    private Long sumValid(Function<Ids, Stream<Id>> evaluator) {
 
         return InputReader
                 .readLines("DayTwoInput.txt")
                 .stream()
                 .map(input -> new Ids(input.split(",")))
-                .flatMap(ids -> ids.getIdsWithRepeatedSequence(2))
-                .mapToLong(id -> Integer.parseInt(id.value))
+                .flatMap(evaluator)
+                .mapToLong(id -> Long.parseLong(id.value))
                 .sum();
     }
 
     @Override
+    public Long partOne() {
+        return sumValid(ids -> ids.getIdsWithRepeatedSequence(2));
+
+    }
+
+    @Override
     public Long partTwo() {
-        return 0L;
+        return sumValid(ids -> ids.getIdsWithRepeatedSequenceOfAtLeast(2));
     }
 }
