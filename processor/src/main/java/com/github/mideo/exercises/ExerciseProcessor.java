@@ -24,14 +24,14 @@ public class ExerciseProcessor extends AbstractProcessor {
       );
       try (Writer writer = file.openWriter()) {
         writer.write("""
-            package com.github.mideo.exercises;
+package com.github.mideo.exercises;
 
-            import com.github.mideo.exercises.Exercise;
+import com.github.mideo.exercises.Exercise;
 
-            public final class DailyExerciseRegistry {
-                public static java.util.List<Exercise> getExercises() {
-                    return java.util.List.of(
-            """);
+public final class DailyExerciseRegistry {
+    public static java.util.List<Exercise> getExercises() {
+        return java.util.List.of(
+""");
         writer.write(
             exercises.stream()
                 .map(e -> "            new " + ((TypeElement) e).getQualifiedName() + "()")
@@ -39,10 +39,11 @@ public class ExerciseProcessor extends AbstractProcessor {
         );
 
         writer.write("""
-                    );
-                }
-            }
-            """);
+
+        );
+    }
+}
+""");
       }
     } catch (Exception ex) {
       throw new RuntimeException("ExerciseProcessor Failed!!", ex);

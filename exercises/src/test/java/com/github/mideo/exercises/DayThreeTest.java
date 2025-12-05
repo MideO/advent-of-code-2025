@@ -17,13 +17,13 @@ class DayThreeTest {
     assertEquals(92, new BatteryBank("818181911112111").maxJoltage());
   }
 
-//    @Test
-//    void maxJoltageCalculatedTweldDigits() {
-//        assertEquals(987654321111L, new BatteryBank("987654321111111").maxJoltage(12));
-//        assertEquals(811111111119L, new BatteryBank("811111111111119").maxJoltage(12));
-//        assertEquals(434234234278L, new BatteryBank("234234234234278").maxJoltage(12));
-//        assertEquals(888911112111L, new BatteryBank("818181911112111").maxJoltage(12));
-//    }
+    @Test
+    void maxJoltageCalculatedTwelveDigits() {
+        assertEquals(987654321111L, new BatteryBank("987654321111111").maxJoltage(12));
+        assertEquals(811111111119L, new BatteryBank("811111111111119").maxJoltage(12));
+        assertEquals(434234234278L, new BatteryBank("234234234234278").maxJoltage(12));
+        assertEquals(888911112111L, new BatteryBank("818181911112111").maxJoltage(12));
+    }
 
 
     @Test
@@ -37,6 +37,17 @@ class DayThreeTest {
     assertEquals(357, maxSum(banks));
   }
 
+    @Test
+    void maxSumOfBatteryBankTwelveDigits() {
+        var banks = List.of(
+                new BatteryBank("987654321111111"),
+                new BatteryBank("811111111111119"),
+                new BatteryBank("234234234234278"),
+                new BatteryBank("818181911112111")
+        );
+        assertEquals(3121910778619L, maxSum(banks, 12));
+    }
+
   @Test
   void name() {
     assertEquals("Day 3: Lobby", new DayThree().name());
@@ -49,5 +60,6 @@ class DayThreeTest {
 
   @Test
   void partTwo() {
+      assertEquals(169685670469164L, new DayThree().partTwo());
   }
 }
