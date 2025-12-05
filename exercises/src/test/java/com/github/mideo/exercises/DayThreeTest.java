@@ -17,8 +17,16 @@ class DayThreeTest {
     assertEquals(92, new BatteryBank("818181911112111").maxJoltage());
   }
 
+//    @Test
+//    void maxJoltageCalculatedTweldDigits() {
+//        assertEquals(987654321111L, new BatteryBank("987654321111111").maxJoltage(12));
+//        assertEquals(811111111119L, new BatteryBank("811111111111119").maxJoltage(12));
+//        assertEquals(434234234278L, new BatteryBank("234234234234278").maxJoltage(12));
+//        assertEquals(888911112111L, new BatteryBank("818181911112111").maxJoltage(12));
+//    }
 
-  @Test
+
+    @Test
   void maxSumOfBatteryBank() {
     var banks = List.of(
         new BatteryBank("987654321111111"),

@@ -6,21 +6,29 @@ import com.github.mideo.InputReader;
 import java.util.List;
 
 @DailyExercise
-public class DayThree implements Exercise<Integer, Integer> {
+public class DayThree implements Exercise<Integer, Long> {
   record BatteryBank(String joltages) {
-    // Bruteforce, eek!
-    int maxJoltage() {
-      int max = 0;
-      for (int i = 0; i < joltages.length(); i++) {
-        for (int j = i + 1; j < joltages.length(); j++) {
-          int left = Character.getNumericValue(joltages.charAt(i));
-          int right = Character.getNumericValue(joltages.charAt(j));
-          int num = left * 10 + right;
 
-          if (num > max) max = num;
+//    long maxJoltage(int numberOfDigits) {return 0L;}
+
+
+    int maxJoltage() {
+        int max = 0;
+        int maxDigitSoFar = -1;
+        for (int i = 0; i < joltages.length(); i++) {
+            int digit = Character.getNumericValue(joltages.charAt(i));
+
+            if (maxDigitSoFar != -1) {
+                int num = maxDigitSoFar * 10 + digit;
+                if (num > max) max = num;
+            }
+
+            if (digit > maxDigitSoFar) {
+                maxDigitSoFar = digit;
+            }
         }
-      }
-      return max;
+
+        return max;
     }
   }
 
@@ -49,7 +57,7 @@ public class DayThree implements Exercise<Integer, Integer> {
   }
 
   @Override
-  public Integer partTwo() {
-    return 0;
+  public Long partTwo() {
+    return 0L;
   }
 }
