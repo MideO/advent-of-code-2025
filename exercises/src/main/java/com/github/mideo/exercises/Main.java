@@ -7,9 +7,15 @@ public class Main {
   public static void main(String[] args) {
     DailyExerciseRegistry.getExercises().forEach(
         exercise -> {
-         logger.info(exercise.getClass().getSimpleName());
-         logger.info("Part 1: "+ exercise.partOne());
-         logger.info("Part 2: "+ exercise.partTwo());
+            logger.info(
+                    String.format(
+                            "%s\n %s\n %s\n",
+                    exercise.getClass().getSimpleName(),
+                    "Part 1: "+ exercise.partOne(),
+                    "Part 2: "+ exercise.partTwo()
+                    )
+            );
+
         }
     );
   }
