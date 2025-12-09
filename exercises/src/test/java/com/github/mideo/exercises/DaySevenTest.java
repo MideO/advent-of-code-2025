@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -94,7 +95,7 @@ class DaySevenTest {
                 testData.indexOf(DaySeven.START_CHAR) % manifold.width()
         );
 
-//        assertEquals(40, manifold.numberOfTachyonBeamDimensions(startPosition, manifold.height()));
+        assertEquals(40L, manifold.numberOfTachyonBeamDimensions(startPosition));
 
     }
 
@@ -112,5 +113,6 @@ class DaySevenTest {
 
     @Test
     void partTwo() {
+        assertEquals(27055852018812L,  new DaySeven().partTwo());
     }
 }
