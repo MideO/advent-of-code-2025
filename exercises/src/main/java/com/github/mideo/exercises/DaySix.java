@@ -75,9 +75,9 @@ public class DaySix implements Exercise<Long, Long> {
         var input = InputReader.readInput("DaySixInput.txt").orElseThrow();
         List<String> split = Arrays.asList(input.replaceAll(" +", " ").split("\n"));
 
-        List<DaySix.MathOperator> operators = Arrays.stream(split.getLast().trim().split(" "))
+        List<MathOperator> operators = Arrays.stream(split.getLast().trim().split(" "))
                 .map(c -> c.charAt(0))
-                .map(DaySix.MathOperator::fromChar)
+                .map(MathOperator::fromChar)
                 .toList();
         List<List<Integer>> numbers = split.subList(0, split.size() - 1)
                 .stream()
@@ -91,10 +91,10 @@ public class DaySix implements Exercise<Long, Long> {
     public Long partTwo() {
         var input = InputReader.readInput("DaySixInput.txt").orElseThrow();
         List<String> split = Arrays.asList(input.split("\n", -1));
-        List<DaySix.MathOperator> operators = Arrays.stream(split.getLast().trim().split(" "))
+        List<MathOperator> operators = Arrays.stream(split.getLast().trim().split(" "))
                 .filter(it -> !it.isEmpty())
                 .map(c -> c.charAt(0))
-                .map(DaySix.MathOperator::fromChar)
+                .map(MathOperator::fromChar)
                 .toList().reversed();
 
         var nums = split.subList(0, split.size() - 1);
