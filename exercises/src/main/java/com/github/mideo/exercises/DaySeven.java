@@ -73,8 +73,8 @@ public class DaySeven implements Exercise<Integer, Long> {
         for (int x = 0; x < width; x++) {
           var ways = timelinesValuesAtPosition[y][x];
           if (ways > 0L) {
-            PositionInManifold below = new PositionInManifold(y + 1, x);
-            char c = valueAt(below);
+            var next = new PositionInManifold(y, x).next();
+            char c = valueAt(next);
 
             if (c == TACHYON_SPLITTER) {
               timelinesValuesAtPosition[y + 1][x - 1] += ways;
