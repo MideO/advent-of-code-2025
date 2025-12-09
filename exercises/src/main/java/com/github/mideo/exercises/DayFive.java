@@ -2,7 +2,9 @@ package com.github.mideo.exercises;
 
 import com.github.mideo.InputReader;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 @DailyExercise
 public class DayFive implements Exercise<Integer, Long> {
@@ -20,6 +22,12 @@ public class DayFive implements Exercise<Integer, Long> {
                     .sorted(Comparator.comparingLong(a -> a.start))
                     .toList();
 
+            return mergeOverlappingRanges(sorted).stream()
+                    .map(range -> range.end - range.start + 1)
+                    .reduce(0L, Long::sum);
+        }
+
+        private List<Range> mergeOverlappingRanges(List<Range> sorted) {
             List<Range> merged = new ArrayList<>();
             for (int i = 1; i < sorted.size(); i++) {
                 if (merged.isEmpty()) {
@@ -33,11 +41,7 @@ public class DayFive implements Exercise<Integer, Long> {
                     merged.add(next);
                 }
             }
-            var total = 0L;
-            for (Range range : merged) {
-                total+= range.end - range.start +1;
-            }
-            return total;
+            return merged;
         }
 
     }
