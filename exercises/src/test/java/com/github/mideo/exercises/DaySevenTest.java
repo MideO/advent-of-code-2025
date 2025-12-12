@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -107,12 +106,12 @@ class DaySevenTest {
 
     @Test
     void partOne() {
-        assertEquals(1628,  new DaySeven().partOne());
+        assertEquals(1628, new DaySeven().partOne());
 
     }
 
     @Test
     void partTwo() {
-        assertEquals(27055852018812L,  new DaySeven().partTwo());
+        assertEquals(27055852018812L, new DaySeven().partTwo());
     }
 }
