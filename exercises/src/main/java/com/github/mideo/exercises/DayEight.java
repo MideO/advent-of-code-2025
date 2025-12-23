@@ -29,7 +29,7 @@ public class DayEight implements Exercise<Integer, BigInteger> {
         );
     }
 
-    record Pair(Tryptic a, Tryptic b, double dist) {
+    record TrypticDistance(Tryptic a, Tryptic b, double dist) {
     }
 
     List<List<Tryptic>> buildCircuits(List<String> input, int edgesToConnect) {
@@ -37,15 +37,15 @@ public class DayEight implements Exercise<Integer, BigInteger> {
                 .map(Tryptic::fromString)
                 .toList();
 
-        List<Pair> pairs = new ArrayList<>();
+        List<TrypticDistance> trypticDistances = new ArrayList<>();
         for (int i = 0; i < points.size(); i++) {
             for (int j = i + 1; j < points.size(); j++) {
                 var p = points.get(i);
                 var q = points.get(j);
-                pairs.add(new Pair(p, q, euclideanDistance(p, q)));
+                trypticDistances.add(new TrypticDistance(p, q, euclideanDistance(p, q)));
             }
         }
-        pairs.sort(Comparator.comparingDouble(p -> p.dist));
+        trypticDistances.sort(Comparator.comparingDouble(p -> p.dist));
         List<List<Tryptic>> circuits = new ArrayList<>();
         for (var p : points) {
             circuits.add(new ArrayList<>(List.of(p)));
@@ -53,7 +53,7 @@ public class DayEight implements Exercise<Integer, BigInteger> {
         Function<Tryptic, List<Tryptic>> findCircuit = (t) ->
                 circuits.stream().filter(c -> c.contains(t)).findFirst().orElseThrow();
         for (int i = 0; i < edgesToConnect; i++) {
-            var pair = pairs.get(i);
+            var pair = trypticDistances.get(i);
 
             List<Tryptic> c1 = findCircuit.apply(pair.a);
             List<Tryptic> c2 = findCircuit.apply(pair.b);
@@ -67,20 +67,20 @@ public class DayEight implements Exercise<Integer, BigInteger> {
         return circuits;
     }
 
-    Pair findFullConnectionPair(List<String> input) {
+    TrypticDistance findFullConnectionPair(List<String> input) {
         List<Tryptic> points = input.stream()
                 .map(Tryptic::fromString)
                 .toList();
-        List<Pair> pairs = new ArrayList<>();
+        List<TrypticDistance> trypticDistances = new ArrayList<>();
         for (int i = 0; i < points.size(); i++) {
             for (int j = i + 1; j < points.size(); j++) {
                 var p = points.get(i);
                 var q = points.get(j);
-                pairs.add(new Pair(p, q, euclideanDistance(p, q)));
+                trypticDistances.add(new TrypticDistance(p, q, euclideanDistance(p, q)));
             }
         }
 
-        pairs.sort(Comparator.comparingDouble(p -> p.dist));
+        trypticDistances.sort(Comparator.comparingDouble(p -> p.dist));
 
         List<List<Tryptic>> circuits = new ArrayList<>();
         for (var p : points) {
@@ -90,18 +90,18 @@ public class DayEight implements Exercise<Integer, BigInteger> {
         Function<Tryptic, List<Tryptic>> findCircuit = (t) ->
                 circuits.stream().filter(c -> c.contains(t)).findFirst().orElseThrow();
 
-        Pair connection = null;
+        TrypticDistance connection = null;
 
-        for (Pair pair : pairs) {
+        for (TrypticDistance trypticDistance : trypticDistances) {
             if (circuits.size() == 1) break;
 
-            var c1 = findCircuit.apply(pair.a);
-            var c2 = findCircuit.apply(pair.b);
+            var c1 = findCircuit.apply(trypticDistance.a);
+            var c2 = findCircuit.apply(trypticDistance.b);
 
             if (c1 != c2) {
                 c2.addAll(c1);
                 circuits.remove(c1);
-                connection = pair;
+                connection = trypticDistance;
             }
         }
 
@@ -130,7 +130,7 @@ public class DayEight implements Exercise<Integer, BigInteger> {
     public BigInteger partTwo() {
 
         var input = InputReader.readLines("DayEightInput.txt");
-        Pair last = findFullConnectionPair(input);
+        TrypticDistance last = findFullConnectionPair(input);
         return BigInteger.valueOf(last.a.x())
                 .multiply(BigInteger.valueOf(last.b.x()));
 
